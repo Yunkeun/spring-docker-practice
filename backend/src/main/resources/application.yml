@@ -1,9 +1,17 @@
 spring:
+  application:
+    name: "backend"
+  datasource:
+    url: "jdbc:mysql://localhost:3306/testdb?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
+    username: "root"
+    password: "1234"
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
   jpa:
+    database: "mysql"
+    show-sql: "true"
     hibernate:
-      ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+      ddl-auto: "none"
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: "true"
+    generate-ddl: "true"
