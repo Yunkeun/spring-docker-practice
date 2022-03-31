@@ -2,37 +2,32 @@ version: "3"
 
 services:
   mysqldb:
-    image: mysql:8.0.2
-    container_name: mysqldb
+    image: mysql
+    container_name: mysql_db
     environment:
-      MYSQL_DATABASE: test_db
-      MYSQL_ROOT_PASSWORD: "1234"
-      MYSQL_ROOT_HOST: '%'
+      - MYSQL_DATABASE=testdb
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_ROOT_HOST=%
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
     ports:
-      - "3306:3306"
+      - 3306:3306
     networks:
       - network-tier
     platform: linux/x86_64
 
   backend:
     container_name: backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     depends_on:
       - mysqldb
     ports:
-      - 8080:8080
+      - 80:8080
     environment:
-      spring.datasource.url: "jdbc:mysql://mysqldb:3306/test_db?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
-      spring.datasource.username: root
-      spring.datasource.password: 1234
-    volumes:
-      - ./backend:/backend
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/testdb?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWROD: 1234
     networks:
       - network-tier
 
 networks:
     network-tier:
-      external: true
