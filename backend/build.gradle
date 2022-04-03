@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'application'
 }
 
 group = 'com.yoonveloping'
@@ -26,6 +27,14 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun{
+	mainClassName = 'com.hjjang.backend.BackendApplication'
+}
+
+bootJar{
+	mainClassName = 'com.hjjang.backend.BackendApplication'
 }
 
 tasks.named('test') {
