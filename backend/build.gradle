@@ -30,11 +30,11 @@ dependencies {
 }
 
 bootRun{
-	mainClassName = 'com.hjjang.backend.BackendApplication'
+	mainClassName = 'com.yoonveloping.playwithdocker.PlaywithdockerApplication'
 }
 
 bootJar{
-	mainClassName = 'com.hjjang.backend.BackendApplication'
+	mainClassName = 'com.yoonveloping.playwithdocker.PlaywithdockerApplication'
 }
 
 tasks.named('test') {

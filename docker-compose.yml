@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    container_name: bauction-backend
+    container_name: prac-backend
     build: ./backend
     restart: on-failure
     depends_on:
@@ -10,7 +10,7 @@ services:
     ports:
       - '8080:8080'
     environment:
-      spring.datasource.url: "jdbc:mysql://bauction-mysqldb:3306/test_db?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true"
+      spring.datasource.url: "jdbc:mysql://prac-mysqldb:3306/prac_db?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true"
     volumes:
       - ./backend:/backend
     networks:
@@ -19,7 +19,7 @@ services:
 
   mysqldb:
     image: mysql:5.7
-    container_name: bauction-mysqldb
+    container_name: prac-mysqldb
     env_file:
       - "./.env"
     command:
@@ -28,7 +28,7 @@ services:
           "--collation-server=utf8mb4_unicode_ci",
       ]
     volumes:
-      - mysql-data:/var/lib/bauction
+      - mysql-data:/var/lib/prac
     ports:
       - "3306:3306"
 
